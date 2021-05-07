@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +34,19 @@ namespace LoupGarou
             leSocket.Listen(1);
         }
 
+        //Constructeur pour le test en mode console
+        public Server( string lAdresseS, int lePortS, int laCapacite = 4)
+        {
+            this.lePortS = lePortS;
+            this.laCapacite = laCapacite;
+            leSocket = new Socket(AddressFamily.InterNetwork,
+            SocketType.Stream,
+            ProtocolType.Tcp);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), this.lePortS);
+            leSocket.Bind(iep);
+            leSocket.Listen(1);
+        }
+
         public void Run()
         {
             while (true)
@@ -41,6 +54,7 @@ namespace LoupGarou
                 nbreClient++;
                 Socket leSocketAcep = leSocket.Accept();
                 laCom = new ClientCommunication(leSocketAcep, nbreClient, this);
+                //Merci de créer  un nouveau client ou joueur???
                 Thread _thread = new Thread(Communication);
                 _thread.Start(laCom);
             }
