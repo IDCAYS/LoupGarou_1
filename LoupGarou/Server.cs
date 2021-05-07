@@ -54,7 +54,7 @@ namespace LoupGarou
                 nbreClient++;
                 Socket leSocketAcep = leSocket.Accept();
                 laCom = new ClientCommunication(leSocketAcep, nbreClient, this);
-                //Merci de créer  un nouveau client ou joueur???
+                
                 Thread _thread = new Thread(Communication);
                 _thread.Start(laCom);
             }
@@ -67,6 +67,7 @@ namespace LoupGarou
             leMessageObtenu = new StreamReader(_Network);
             leMessageAEnvoyer = new StreamWriter(_Network);
             string ipport = laCom.leSocket.RemoteEndPoint.ToString();
+            //Merci de créer  un nouveau client à cet endroit et de l'ajouter à la collection
             while (true)
             {
                 setText("Client n. :" + nbreClient + " avec l'adresse " + ipport);
