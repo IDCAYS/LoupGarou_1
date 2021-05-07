@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,6 @@ namespace LoupGarou
         public Jour leJourEnCour;
         public Joueur leMaire;
         public string narration;
-        public int jours;
 
 
         public void attribuerDesRoles()
@@ -52,7 +51,7 @@ namespace LoupGarou
             for(int i=0; i < _nbreLoup; i++)
             {
                 _Aleatoire = _Random.Next(0, n);
-                lesJoueurs[temp.ElementAt(_Aleatoire).Key].leRole = lesRoles[0];
+                lesJoueurs[temp.ElementAt(_Aleatoire).Key].leRole = lesRoles[0]; // Le role du loup ne peut pas avoir le meme index que celui du villageois.
                 lesJoueurs.Remove(temp.ElementAt(_Aleatoire).Key);
                 n = n - 1;
             }
@@ -61,7 +60,7 @@ namespace LoupGarou
 
         public void jeu()
         { 
-
+            //Créer les 3 roles
         }
 
         public void init()
@@ -143,18 +142,20 @@ namespace LoupGarou
             int result = 0;
             for(int i = 0; i < lesJoueursEnBallotage.Count; i++)
             {
-                if(result < lesJoueursEnBallotage.ElementAt(i).Value.leNbreVote)
+                if (result < lesJoueursEnBallotage.ElementAt(i).Value.leNbreVote)
                 {
                     result = lesJoueursEnBallotage.ElementAt(i).Value.leNbreVote;
 
-                    if(i>0)
+                    if (i > 0)
                     {
                         lesJoueursEnBallotage.Remove(lesJoueursEnBallotage.ElementAt(i - 1).Key);
-                    }else if(result > lesJoueursEnBallotage.ElementAt(i).Value.leNbreVote)
-                    {
-                        lesJoueursEnBallotage.Remove(lesJoueursEnBallotage.ElementAt(i).Key);
                     }
                 }
+                else if (result > lesJoueursEnBallotage.ElementAt(i).Value.leNbreVote)
+                {
+                    lesJoueursEnBallotage.Remove(lesJoueursEnBallotage.ElementAt(i).Key);
+                }
+                
             }
 
             if(lesJoueursEnBallotage.Count == 1)
@@ -204,7 +205,7 @@ namespace LoupGarou
             }
             foreach (KeyValuePair<int, Joueur> element in lesJoueursActifs)
             {
-                if (element.Value.leRole == lesRoles[0] || element.Value.leRole == lesRoles[1])
+                if (element.Value.leRole == lesRoles[0] || element.Value.leRole == lesRoles[1]) //Cela veut dire que le maire aura l'index 1 et le villageois l'index 0 doonc le loup l'index 2 pour le role!
                 {
                     lesVillageois.Add(element.Key, element.Value);
                 }
