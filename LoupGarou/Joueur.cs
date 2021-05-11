@@ -18,7 +18,7 @@ namespace LoupGarou
         public int leNbreVote = 0;
         public Role leRole;
 
-        public Joueur(string adresseS, int portS, string login) : base(adresseS, portS, login)
+        public Joueur(string adresseS, int portS, string login) : base(adresseS, portS, login){
                
         public Joueur(string login, int num) : base(num)
         {
