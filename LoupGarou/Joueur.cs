@@ -19,7 +19,7 @@ namespace LoupGarou
         public Role leRole;
 
         public Joueur(string adresseS, int portS, string login) : base(adresseS, portS, login)
-                //Constructeur pour le test en mode console
+               
         public Joueur(string login, int num) : base(num)
         {
             this.leLogin = login;
